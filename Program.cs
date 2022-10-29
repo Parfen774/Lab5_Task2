@@ -7,7 +7,7 @@ namespace Program
         public static bool IsNumber(string line)
         {
             foreach (var item in line)
-                if (!char.IsDigit(item))
+                if (!char.IsDigit(item) && item != '-')
                     return false;
 
             return true;
@@ -17,8 +17,15 @@ namespace Program
         {
             int sum = 0;
 
-            foreach (char item in line)
-                sum += item - 48;
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line[i] != '-') sum += line[i] - 48;
+                else
+                {
+                    i++;
+                    sum -= line[i] - 48;
+                }
+            }
 
             return sum;
         }
